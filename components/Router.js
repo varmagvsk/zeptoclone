@@ -1,7 +1,14 @@
 import Leact from "./Leact.js"
 import NavBar from "./Navbar.js";
-
-
+import Account from "../pages/Account.js";
+import Home from "../pages/Home.js";
+import Search from "../pages/Search.js";
+import Support from "../pages/Support.js";
+import Referral from "../pages/Referral.js";
+import Profile from "../pages/Profile.js";
+import Category from "../pages/Category.js";
+import Address from "../pages/Address.js";
+import Wallet from "../pages/Wallet.js";
 export default class Router extends Leact{
     constructor(){
         super();
@@ -27,6 +34,12 @@ export default class Router extends Leact{
                 path: '/account/profile', view: `<profile-page></profile-page>`,query:false
             },
             {
+                path: '/account/addresses', view: `<address-page></address-page>`,query:false
+            },
+            {
+                path: '/account/wallet', view: `<wallet-page></wallet-page>`,query:false
+            },
+            {
                 path: '/categories', view: [`<category-page></category-page>`,`<subcat-page></subcat-page>`],query:true
             },
             {
@@ -44,8 +57,8 @@ export default class Router extends Leact{
 
         this.template = document.createElement('template')
         this.template.innerHTML = `<div>
-        <nav-bar></nav-bar>
-        <div class='content'></div>
+        <nav-bar style="position:fixed;top:0;left:0;right:0" count=11></nav-bar>
+        <div style="margin-top:100px" class='content'></div>
         </div>`
 
         this.shadowRoot.appendChild(this.template.content.cloneNode(true))
