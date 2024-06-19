@@ -104,7 +104,6 @@ export default class Home extends Leact{
                 /* overflow: auto; */
             }
 
-
             .place_card_action {
                 padding: 10px;
             }
