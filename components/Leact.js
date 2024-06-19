@@ -1,7 +1,7 @@
 export default class Leact extends HTMLElement{
     constructor(){
         super();
-        this.state ={
+        this.state = {
 
         }
     }
