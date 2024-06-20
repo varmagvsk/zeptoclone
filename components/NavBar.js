@@ -4,8 +4,7 @@ export default class NavBar extends Leact {
   constructor() {
     super();
     this.state = {
-
-      cartcount: this.getAttribute('count')
+      cartcount: 0
 
     };
     //this.template = document.createElement('template')

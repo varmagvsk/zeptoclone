@@ -1,6 +1,6 @@
 import Leact from "../components/Leact.js";
 import Spinner from "../components/Spinner.js";
-
+import CartBtn from "../components/Cartbtn.js";
 export default class Home extends Leact{
     constructor(){
         super()
@@ -63,6 +63,7 @@ export default class Home extends Leact{
                 width: 150px;
                 /*height: 150px;*/
                 margin-left: 10px;
+                margin-bottom: 20px;
                 background: #fff;
                 /* box-shadow: 0 0 10px rgb(0, 0, 0, 0.2); */
             }
@@ -104,28 +105,6 @@ export default class Home extends Leact{
                 /* overflow: auto; */
             }
 
-            .place_card_action {
-                padding: 10px;
-            }
-
-            .place_card_action button{
-                box-sizing: border-box;
-                width: 100%;
-                background: #fff;
-                color: rgb(255, 50, 105);
-                border: none;
-                border-radius: 4px;
-                outline: 1px solid rgb(255, 50, 105);
-                outline-offset: 2px;
-                transition: .4s;
-                cursor: pointer;
-                font-size: 16px;
-                font-weight: 600;
-            }
-
-            .place_card_action button:hover{
-                outline-offset: 4px;
-            }
 
                 </style>
             
@@ -138,9 +117,7 @@ export default class Home extends Leact{
                     <span>${product.langpref} - ${product.proditems[0].size}</span>
                     <p>₹${product.proditems[0].price}</p>
                 </div>
-                <div class="place_card_action">
-                    <button>Add to Cart</button>
-                </div>
+                <cart-btn style=""></cart-btn>
             </div>
             
             </div>`

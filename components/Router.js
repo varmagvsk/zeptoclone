@@ -57,7 +57,7 @@ export default class Router extends Leact{
 
         this.template = document.createElement('template')
         this.template.innerHTML = `<div>
-        <nav-bar style="position:fixed;top:0;left:0;right:0" count=11></nav-bar>
+        <nav-bar style="position:fixed;top:0;left:0;right:0"></nav-bar>
         <div style="margin-top:100px" class='content'></div>
         </div>`
 
