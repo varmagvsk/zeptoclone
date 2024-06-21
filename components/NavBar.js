@@ -260,6 +260,11 @@ export default class NavBar extends Leact {
       //console.log(router)
       router.routerHandler();
     })
+
+    this.shadowRoot.querySelector('.header_cart').addEventListener('click',(e)=>{
+      let router = document.querySelector('browser-router')
+      router.setState({showCart:true})
+    })
   }
 }
 

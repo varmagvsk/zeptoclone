@@ -9,10 +9,18 @@ import Profile from "../pages/Profile.js";
 import Category from "../pages/Category.js";
 import Address from "../pages/Address.js";
 import Wallet from "../pages/Wallet.js";
+import CartComp from "./CartComp.js";
+
 export default class Router extends Leact{
     constructor(){
         super();
+
+        this.state = {
+            showCart: false
+        }
+
         this.attachShadow({mode:'open'})
+        
 
         this.routes = [
             {
@@ -54,15 +62,7 @@ export default class Router extends Leact{
             }
 
         ]
-
-        this.template = document.createElement('template')
-        this.template.innerHTML = `<div>
-        <nav-bar style="position:fixed;top:0;left:0;right:0"></nav-bar>
-        <div style="margin-top:100px" class='content'></div>
-        </div>`
-
-        this.shadowRoot.appendChild(this.template.content.cloneNode(true))
-        this.routerHandler()
+        this.render();
     }
 
     routerHandler=()=>{
@@ -81,6 +81,24 @@ export default class Router extends Leact{
             this.shadowRoot.querySelector(".content").innerHTML = `<notfound-page></notfound-page>`
         }
         
+    }
+
+    render(){
+        console.log("router rendered")
+        this.shadowRoot.innerHTML = `
+         <style>
+        
+        </style>
+        
+        <div>
+            <nav-bar style="position:fixed;top:0;left:0;right:0"></nav-bar>
+            ${this.state.showCart ? `<cart-component></cart-component>` : ''}
+            <div style="margin-top:100px" class='content'></div>
+        </div>
+        
+        `;
+
+        this.routerHandler()
     }
 
     
