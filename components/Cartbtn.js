@@ -4,7 +4,7 @@ export default class CartBtn extends Leact{
     constructor(){
         super();
         this.state = {
-            count: 0
+            count: parseInt(this.getAttribute('cartcount'))
         }
         this.attachShadow({mode:"open"})
         this.render();

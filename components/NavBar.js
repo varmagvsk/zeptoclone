@@ -1,10 +1,12 @@
 import Leact from "./Leact.js";
+import CartComp from "./CartComp.js";
 
 export default class NavBar extends Leact {
   constructor() {
     super();
     this.state = {
-      cartcount: 0
+      cartcount: 0,
+      showCart: false
 
     };
     //this.template = document.createElement('template')
@@ -163,6 +165,9 @@ export default class NavBar extends Leact {
       }
       
       </style>
+        <div>
+        ${this.state.showCart ? `<cart-component></cart-component>` : ''}
+        </div>
         <div class="header_container">
           <div class="header_container_heading">
             <div class="heading">
@@ -245,6 +250,10 @@ export default class NavBar extends Leact {
         </div>
       </div>
     `;
+
+    if(this.state.showCart){
+      this.shadowRoot.querySelector('cart-component').updateCart = (val)=>{this.setState({showCart:val})}
+    }
     this.shadowRoot.querySelector('.header_login').addEventListener('click',(e)=>{
       let href = e.currentTarget.getAttribute('goto')
       console.log(href)
@@ -262,8 +271,7 @@ export default class NavBar extends Leact {
     })
 
     this.shadowRoot.querySelector('.header_cart').addEventListener('click',(e)=>{
-      let router = document.querySelector('browser-router')
-      router.setState({showCart:true})
+      this.setState({showCart:true})
     })
   }
 }

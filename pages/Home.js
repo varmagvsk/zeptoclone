@@ -1,6 +1,7 @@
 import Leact from "../components/Leact.js";
 import Spinner from "../components/Spinner.js";
 import CartBtn from "../components/Cartbtn.js";
+import ProductCard from "../components/ProductCard.js";
 export default class Home extends Leact{
     constructor(){
         super()
@@ -26,7 +27,15 @@ export default class Home extends Leact{
         }).then(res=>res.json())
         .then(data=>{
             if(data.code == '999'){
-                console.log(data)
+                //console.log(data)
+                let i = 0;
+                data.prodlist.forEach((product)=>{
+                    product.selected = false;
+                    product.cartcount = 0
+                    
+                })
+                console.log('data fetched')
+                //console.log(data.prodlist)
                 this.setState({loading:false,products:data.prodlist})
             }
         })
@@ -34,105 +43,35 @@ export default class Home extends Leact{
 
     renderProducts(){
         let prodctCard = '';
-
         this.state.products.forEach((product)=>{
-            prodctCard += `<div>
-            
-            <style>
-
-                    
-            /* Places card */
-
-
-
-
-            .content_container {
-                width: 80%;
-                margin: auto;
-                display: flex;
-                justify-content: space-evenly;
-                align-items: self-start;
-                flex-wrap: wrap;
-                gap: 15px;
-
-                
-            }
-
-
-            .place_card {
-                width: 150px;
-                /*height: 150px;*/
-                margin-left: 10px;
-                margin-bottom: 20px;
-                background: #fff;
-                /* box-shadow: 0 0 10px rgb(0, 0, 0, 0.2); */
-            }
-
-            .place_card_image{
-                width: 100%;
-                overflow: hidden;
-                border-radius: 10px;
-                border: 0.5px solid grey;
-            }
-
-            .place_card_image img {
-                width: 100%;
-                height: 100%;
-                /* border-radius: 5px 5px 0 0; */
-                aspect-ratio: 1/1;
-                transition: .4s;
-                cursor: pointer;
-            }
-
-            .place_card_image img:hover{
-                transform: scale(1.2);
-            }
-
-
-            .place_card_content {
-                /* padding: 20px; */
-                /* overflow: hidden; */
-                
-            }
-
-            .place_card_content span {
-                font-size: 16px;
-                font-weight: 600;
-            }
-
-            .place_card_content p {
-                /* margin-top: 10px; */
-                /* overflow: auto; */
-            }
-
-
-                </style>
-            
-            
-            <div class="place_card">
-                <div class="place_card_image">
-                <img src="${product.prdimg}" />
-                </div>
-                <div class="place_card_content">
-                    <span>${product.langpref} - ${product.proditems[0].size}</span>
-                    <p>₹${product.proditems[0].price}</p>
-                </div>
-                <cart-btn style=""></cart-btn>
-            </div>
-            
-            </div>`
+            prodctCard += `<product-card id='${product.id}' ></product-card>`
         })
 
         return prodctCard
     }
 
+    mapProductsData = ()=>{
+        let productCards = this.shadowRoot.querySelectorAll('product-card')
+        this.state.products.forEach((product)=>{
+            for(let i=0;i<productCards.length;i++){
+                if(productCards[i].id == product.id){
+                    productCards[i].product = product
+                    productCards[i].setState({dataReceived:true})
+                    break;
+                }
+            }
+        })
+    }
+
     render(){
+        console.log('home rendered')
         this.shadowRoot.innerHTML = this.state.loading ? `<loading-spinner style="margin-left:35%"></loading-spinner>` :  `
-        <div style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center">
-        ${this.renderProducts()}      
-        
+        <div class='products' style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center">
+        ${this.renderProducts()}        
         </div>
         `
+        this.mapProductsData();
+        //console.dir(this.shadowRoot)
     }
 }
 

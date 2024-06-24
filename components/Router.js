@@ -16,7 +16,6 @@ export default class Router extends Leact{
         super();
 
         this.state = {
-            showCart: false
         }
 
         this.attachShadow({mode:'open'})
@@ -92,7 +91,6 @@ export default class Router extends Leact{
         
         <div>
             <nav-bar style="position:fixed;top:0;left:0;right:0"></nav-bar>
-            ${this.state.showCart ? `<cart-component></cart-component>` : ''}
             <div style="margin-top:100px" class='content'></div>
         </div>
         
