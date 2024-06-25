@@ -42,36 +42,32 @@ export default class Home extends Leact{
     }
 
     renderProducts(){
-        let prodctCard = '';
+        let prodctCards = '';
         this.state.products.forEach((product)=>{
-            prodctCard += `<product-card id='${product.id}' ></product-card>`
+            prodctCards = prodctCards + `<product-card id='${product.id}' ></product-card>`
         })
-
-        return prodctCard
+        return prodctCards
     }
 
     mapProductsData = ()=>{
-        let productCards = this.shadowRoot.querySelectorAll('product-card')
+        console.log("shadowRoot")
+        console.dir(this.shadowRoot)
+        console.log("productsData",this.state.products)
         this.state.products.forEach((product)=>{
-            for(let i=0;i<productCards.length;i++){
-                if(productCards[i].id == product.id){
-                    productCards[i].product = product
-                    productCards[i].setState({dataReceived:true})
-                    break;
-                }
-            }
+            let productCard = this.shadowRoot.querySelector(`#${CSS.escape(product.id)}`)
+            productCard.data = product
+            productCard.setState({dataReceived:true})
         })
+
     }
 
     render(){
-        console.log('home rendered')
         this.shadowRoot.innerHTML = this.state.loading ? `<loading-spinner style="margin-left:35%"></loading-spinner>` :  `
         <div class='products' style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center">
         ${this.renderProducts()}        
         </div>
         `
         this.mapProductsData();
-        //console.dir(this.shadowRoot)
     }
 }
 

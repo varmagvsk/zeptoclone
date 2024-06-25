@@ -8,15 +8,12 @@ export default class ProductCard extends Leact{
         this.state = {
             dataReceived: false
         }
+        this.data = {};
         this.attachShadow({mode:"open"})
         this.render();
     }
 
     render(){
-        let product = {}
-        if(this.state.dataReceived) {
-            product = this.product
-        }
         this.shadowRoot.innerHTML = this.state.dataReceived ? `<div>
             
             <style>
@@ -92,13 +89,13 @@ export default class ProductCard extends Leact{
             
             <div class="place_card">
                 <div class="place_card_image">
-                <img src="${product.prdimg}" />
+                <img src="${this.data.prdimg}" />
                 </div>
                 <div class="place_card_content">
-                    <span>${product.langpref} - ${product.proditems[0].size}</span>
-                    <p>₹${product.proditems[0].price}</p>
+                    <span>${this.data.langpref} - ${this.data.proditems[0].size}</span>
+                    <p>₹${this.data.proditems[0].price}</p>
                 </div>
-                <cart-btn style="" selected="${product.selected}" cartcount="${product.cartcount}"></cart-btn>
+                <cart-btn style="" selected="${this.data.selected}" cartcount="${this.data.cartcount}"></cart-btn>
             </div>
             
             </div>` : '<div></div>'

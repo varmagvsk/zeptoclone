@@ -11,7 +11,7 @@ export default class CartBtn extends Leact{
     }
 
     render(){
-        console.log("rendered")
+        //console.log("rendered")
         this.shadowRoot.innerHTML = `
         <style>
         .place_card_action {
